@@ -20,6 +20,6 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: test-guide.data-infact.com
-          username: test-guide
+          username: root
           password: ${{ secrets.SSH_PASSWORD }}
           script: touch /home/wuxianyu/main_update_$$(date +%Y-%m-%dT%H-%M-%S)
