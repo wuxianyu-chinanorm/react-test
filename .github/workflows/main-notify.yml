@@ -11,7 +11,7 @@ jobs:
       - name: SSH and touch timestamp file
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: data-infact.com
+          host: test-guide.data-infact.com
           username: test-guide
           password: ${{ secrets.SSH_PASSWORD }}
           script: touch /home/wuxianyu/main_update_$(date +%Y-%m-%dT%H-%M-%S)
