@@ -19,11 +19,17 @@ FROM nginx:alpine
 # Copy built assets from builder
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# SPA fallback: serve index.html for client-side routes
+# App is built with base: '/foo/', so assets are requested as /foo/index-*.js etc.
+# Use alias so /foo/<file> maps to /usr/share/nginx/html/<file> (not .../foo/<file>).
+# SPA fallback: serve index.html for client-side routes under /foo/
 RUN echo 'server { \
     listen 80; \
     root /usr/share/nginx/html; \
     index index.html; \
+    location /foo/ { \
+        alias /usr/share/nginx/html/; \
+        try_files $uri $uri/ /foo/index.html; \
+    } \
     location / { try_files $uri $uri/ /index.html; } \
     }' > /etc/nginx/conf.d/default.conf
 
