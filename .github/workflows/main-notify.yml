@@ -16,10 +16,10 @@ jobs:
           echo "Checking TCP port 22..."
           timeout 5 bash -c 'cat < /dev/null > /dev/tcp/test-guide.data-infact.com/22' || { echo "::error::Cannot reach test-guide.data-infact.com:22 (SSH). Check firewall/network."; exit 1; }
           echo "Host is reachable."
-      - name: SSH and touch timestamp file
+      - name: SSH and run deploy script
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: test-guide.data-infact.com
           username: root
           password: ${{ secrets.SSH_PASSWORD }}
-          script: touch /home/wuxianyu/main_update_$(date +%Y-%m-%dT%H-%M-%S)
+          script: bash /home/wuxianyu/react-test/deploy.sh
