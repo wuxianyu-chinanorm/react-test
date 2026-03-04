@@ -22,4 +22,4 @@ jobs:
           host: test-guide.data-infact.com
           username: root
           password: ${{ secrets.SSH_PASSWORD }}
-          script: bash /home/wuxianyu/react-test/deploy.sh
+          script: cd /home/wuxianyu/react-test && bash deploy.sh
